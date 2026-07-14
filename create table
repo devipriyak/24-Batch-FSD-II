@@ -1,0 +1,30 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class CreateTableExample {
+    public static void main(String[] args) {
+ try{
+        String url = "jdbc:oracle:thin:@localhost:1521:XE";
+        String username = "system";
+        String password = "123456";
+
+        String sql = "CREATE TABLE EMPLOYEE ("
+                + "EMP_ID NUMBER PRIMARY KEY, "
+                + "EMP_NAME VARCHAR2(100) NOT NULL, "
+                + "EMAIL VARCHAR2(150), "
+                + "SALARY NUMBER(10,2), "
+               + "HIRE_DATE DATE)";
+
+Class.forName("oracle.jdbc.driver.OracleDriver");       
+ 
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement stmt = conn.createStatement();
+        
+            stmt.executeUpdate(sql);
+            System.out.println("Table created successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
